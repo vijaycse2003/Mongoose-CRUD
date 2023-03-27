@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB CRUD operation</title>
+</head>
+<style>
+    body {
+        background: #000;
+        color: #fff;
+        height: 100vh;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    form {
+        text-align: center;
+        height: 140px;
+    }
+
+    input {
+        height: 30px;
+        width: 600px;
+        font-weight: 800;
+        color: red;
+    }
+
+    input[type='submit'] {
+        margin-top: 30px;
+        height: 30px;
+        width: 100px;
+        background-color: #00f;
+    }
+
+    ul li {
+        list-style: none;
+        padding: 5px;
+        color: green;
+        font-size: 1.3rem;
+    }
+
+    ::placeholder {
+        font-size: 1.2rem;
+        color: blue;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <h1>
+        MongoDB CRUD Example
+    </h1>
+    <h4 style="color:#0f0;font-weight:600;"> {{message}}</h4>
+
+    {{#if edit_id}}
+
+    <h3>Update Data</h3>
+    <form action="/update-book/{{edit_id}}" method="POST">
+        <label>Title</label><br>
+        <input type="text" name="title" value="{{edit_book.name}}"><br>
+        <label>Author</label><br>
+        <input type="text" name="author" value="{{edit_book.author}}"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <br><br>
+    <hr>
+    {{else}}
+    <h3>Insert Data</h3>
+    <form action="/store-book/" method="POST">
+        <label>Title</label><br>
+        <input type="text" name="title" placeholder="Enter Book title  Name....."><br>
+        <label>Author</label><br>
+        <input type="text" name="author" placeholder="Enter Book Author  Name....."><br>
+        <input type="submit" value="Submit">
+    </form>
+    <br><br>
+    <hr>
+    {{/if}}
+
+
+
+
+    <ul>
+        {{#each employe}}
+        <li>{{this.name}} - {{this.author}}  <a href="/?edit_id={{this._id}}">Edit</a>  <a href="/?delete_id={{this._id}}" onclick="confirm('Are You Sure Want To Delete')">Delete</a></li>
+        {{/each}}
+    </ul>
+</body>
+
+</html>
